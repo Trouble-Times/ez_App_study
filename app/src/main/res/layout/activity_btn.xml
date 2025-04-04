@@ -7,14 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".BtnActivity">
 
-    <Button
-        android:id="@+id/btn_click"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="按钮"/>
-    <!-- 添加底部导航栏 -->
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="16dp">
+
+        <Button
+            android:id="@+id/btn_click_native"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Native方法调用"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp"
+            android:layout_marginBottom="100dp"/>
+
+        <Button
+            android:id="@+id/btn_click_java"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Java方法调用"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp"/>
+    </LinearLayout>
+
+    <!-- 底部导航栏保持不变 -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

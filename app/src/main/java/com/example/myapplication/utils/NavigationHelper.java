@@ -11,6 +11,9 @@ import com.example.myapplication.R;
 import com.example.myapplication.SaveDataAndFunc;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import android.app.ActivityManager;
+import java.util.List;
+
 public class NavigationHelper {
     public static void setupBottomNavigation(
             Context context, 
@@ -42,8 +45,26 @@ public class NavigationHelper {
     }
 
     private static void navigateTo(Context context, Class<?> cls) {
+        
+        // 打印当前任务栈信息
+//        if (context instanceof Activity) {
+//            try {
+//                ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+//                List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(10); // 获取最近10个任务
+//                for (ActivityManager.RunningTaskInfo task : tasks) {
+//                    Log.d("TaskStack", "Task ID: " + task.id);
+//                    Log.d("TaskStack", "Top Activity: " + task.topActivity.getClassName());
+//                    Log.d("TaskStack", "Base Activity: " + task.baseActivity.getClassName());
+//                    Log.d("TaskStack", "Num Activities: " + task.numActivities);
+//                    Log.d("TaskStack", "----------------------");
+//                }
+//            } catch (SecurityException e) {
+//                Log.e("TaskStack", "需要GET_TASKS权限", e);
+//            }
+//        }
+    
         Intent intent = new Intent(context, cls);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP); // 清除栈顶所有活动并将新活动置于栈顶
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP); // 清除栈顶所有活动并将新活动置于栈顶
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // 启动新任务
         }
