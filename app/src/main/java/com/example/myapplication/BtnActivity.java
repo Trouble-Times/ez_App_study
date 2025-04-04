@@ -9,15 +9,26 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BtnActivity extends AppCompatActivity {
+    // 加载native库
+    static {
+        System.loadLibrary("native-lib");
+    }
+    
+    // 修改native方法声明，添加三个int参数
+    public native int add(int a, int b, int c);
+
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_btn);
         
-        // 获取按钮并设置点击事件
         Button btnJump = findViewById(R.id.btn_click);
         btnJump.setOnClickListener(v -> {
-            Toast.makeText(BtnActivity.this, "你点击了按钮", Toast.LENGTH_SHORT).show();
+            // 调用native方法并传入参数1,2,3
+            int result = add(1, 2, 3);
+            Toast.makeText(BtnActivity.this, 
+                "Native返回结果: " + result, 
+                Toast.LENGTH_SHORT).show();
         });
 
         BottomNavigationView navView = findViewById(R.id.bottom_navigation);
