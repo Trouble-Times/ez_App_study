@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="首页"/>
+    <item
+        android:id="@+id/nav_play"
+        android:icon="@drawable/ic_play"
+        android:title="跳转页面"/>
+    <item
+        android:id="@+id/nav_wallpaper"
+        android:icon="@drawable/ic_wallpaper"
+        android:title="通知"/>
+</menu>
