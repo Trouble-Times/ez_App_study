@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="native_return_string">"Native返回结果: "</string>
 </resources>

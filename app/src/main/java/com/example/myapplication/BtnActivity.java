@@ -32,7 +32,7 @@ public class BtnActivity extends AppCompatActivity {
             // 调用native方法并传入参数1,2,3
             int result = add(1, 2, 3);
             Toast.makeText(BtnActivity.this, 
-                "Native返回结果: " + result, 
+                getString(R.string.native_return_string) + result,
                 Toast.LENGTH_SHORT).show();
         });
 
