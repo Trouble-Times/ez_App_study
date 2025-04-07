@@ -22,7 +22,7 @@
             android:text="Native方法调用"
             android:paddingHorizontal="32dp"
             android:paddingVertical="16dp"
-            android:layout_marginBottom="100dp"/>
+            android:layout_marginBottom="16dp"/>
 
         <Button
             android:id="@+id/btn_click_java"
@@ -30,7 +30,64 @@
             android:layout_height="wrap_content"
             android:text="Java方法调用"
             android:paddingHorizontal="32dp"
-            android:paddingVertical="16dp"/>
+            android:paddingVertical="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- 新增的5个按钮 -->
+        <Button
+            android:id="@+id/btn_InnerClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="内部类"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp"
+            android:layout_marginBottom="16dp"/>
+            
+        <Button
+            android:id="@+id/btn_OnCreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="构造函数"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp"
+            android:layout_marginBottom="16dp"/>
+            
+        <Button
+            android:id="@+id/btn_Reload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重载函数"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp"
+            android:layout_marginBottom="16dp"/>
+            
+        <Button
+            android:id="@+id/btn_Implements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="接口实现"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp"
+            android:layout_marginBottom="16dp"/>
+            
+        <Button
+            android:id="@+id/btn_Thread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="多线程"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp"
+            android:layout_marginBottom="16dp"/>
+            
+        <Button
+            android:id="@+id/btn_Toast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hook系统Toast"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp"
+            android:layout_marginBottom="16dp"/>
+        
     </LinearLayout>
 
     <!-- 底部导航栏保持不变 -->
