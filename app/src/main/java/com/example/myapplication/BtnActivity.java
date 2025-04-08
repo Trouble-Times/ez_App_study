@@ -22,45 +22,6 @@ public class BtnActivity extends AppCompatActivity {
         return a - b;
     }
 
-    // 新增内部类实现乘法
-    public static class Multiplier {
-        private int baseValue;
-        
-        // 构造函数
-        public Multiplier(int baseValue) {
-            this.baseValue = baseValue;
-        }
-        
-        // 实例方法，使用构造函数设置的baseValue
-        public int multiplyWithBase(int b) {
-            return baseValue * b;
-        }
-        
-        // 重载方法1：两个int参数
-        public static int multiply(int a, int b) {
-            return a * b * 2;
-        }
-        
-        // 重载方法2：三个int参数
-        public static int multiply(int a, int b, int c) {
-            return a * b * c * 3;
-        }
-        
-    }
-
-    // 构造函数
-    public class User {
-        private String name;
-        
-        public User(String name) {
-            this.name = name;
-        }
-        
-        public String getName() {
-            return name;
-        }
-    }
-
     // 接口方法
     public interface Calculator {
         int calculate(int a, int b);
@@ -73,14 +34,73 @@ public class BtnActivity extends AppCompatActivity {
         }
     }
 
-    // 添加异步任务方法
-    private int asyncTask() {
-        new Thread(() -> {
-            android.util.Log.d("ThreadDemo", "后台线程执行");}).start();
-        return Thread.activeCount();
+    // 静态内部类 + 被调用过 + 重载函数
+    public static class StaticUsed {
+        static private String name1 = "静态变量名字_StaticUsed";
+        private String name2 = "成员变量名字_StaticUsed";
+
+        // 构造函数
+        public StaticUsed(String name2) {
+            this.name2 = name2;
+        }
+        
+        // 普通方法
+        public String getName() {
+            return name1 + ", " + name2;  // 修改这里，直接使用类自己的静态变量
+        }
+        
+        // 重载方法1：两个int参数
+        public static int mul(int a, int b) {
+            return a * b * 2;
+        }
+        
+        // 重载方法2：三个int参数
+        public static int mul(int a, int b, int c) {
+            return a * b * c * 3;
+        }
+
     }
 
+    // 静态内部类 且 从来没被调用过
+    public static class StaticNotUsed {
+        private String name = "成员变量名字_StaticNotUsed";
+        // 构造函数
+        public StaticNotUsed(String name) {
+            this.name = name;
+        }
+        
+        // 普通方法
+        public String getName() {
+            return this.name;
+        }
+                
+    }
 
+    // 非静态内部类 且 被调用过
+    public class CheckUsed {
+        private int threshold = 10;
+        
+        public String check(int value) {
+            return "value: " + value + " " + "private_Data: " + this.threshold;
+        }
+        
+        public void setThreshold(int newThreshold) {
+            this.threshold = newThreshold;
+        }
+    }
+
+    // 非静态内部类 且 从来没被调用过 , 尝试hook调用里面的 构造 和 普通方法
+    public class CheckNotUsed  {
+        private int threshold = 10;
+        
+        public String check(int value) {
+            return "value: " + value + " " + "private_Data: " + this.threshold;
+        }
+        
+        public void setThreshold(int newThreshold) {
+            this.threshold = newThreshold;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
@@ -90,7 +110,7 @@ public class BtnActivity extends AppCompatActivity {
         // Native方法调用
         findViewById(R.id.btn_click_native).setOnClickListener(v -> {
             int result = add(1, 2, 3);
-            Toast.makeText(this, getString(R.string.native_return_string) + result, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Native 返回结果: " + getString(R.string.native_return_string) + result, Toast.LENGTH_SHORT).show();
         });
     
         // Java方法调用
@@ -98,46 +118,38 @@ public class BtnActivity extends AppCompatActivity {
             int result = Sub(3, 1);
             Toast.makeText(this, "Java返回结果: " + result, Toast.LENGTH_SHORT).show();
         });
-    
-        // 内部类方法
-        findViewById(R.id.btn_InnerClass).setOnClickListener(v -> {
-            int result = Multiplier.multiply(2, 3);
-            Toast.makeText(this, "内部类乘法结果: " + result, Toast.LENGTH_SHORT).show();
-        });
-    
-        // 构造函数
-        findViewById(R.id.btn_OnCreate).setOnClickListener(v -> {
-            User user = new User("测试用户");
-            Toast.makeText(this, "构造函数创建用户: " + user.getName(), Toast.LENGTH_SHORT).show();
-        });
-    
-        // 重载函数
-        findViewById(R.id.btn_Reload).setOnClickListener(v -> {
-            int result1 = Multiplier.multiply(2, 3);
-            int result2 = Multiplier.multiply(2, 3, 4);
-            Toast.makeText(this, 
-                "重载方法结果: " + result1 + " 和 " + result2, 
-                Toast.LENGTH_SHORT).show();
-        });
-    
+        
         // 接口实现
         findViewById(R.id.btn_Implements).setOnClickListener(v -> {
             Calculator calculator = new SimpleCalculator();
             int result = calculator.calculate(2, 3);
             Toast.makeText(this, "接口实现结果: " + result, Toast.LENGTH_SHORT).show();
         });
-    
-        // 多线程
-        findViewById(R.id.btn_Thread).setOnClickListener(v -> {
-            int count = asyncTask();
-            Toast.makeText(this, "多线程任务已启动,现在已有" + count + "个线程", Toast.LENGTH_SHORT).show();
+
+        // 静态内部类 + 普通方法 + 构造函数 + 静态变量
+        findViewById(R.id.btn_Inner_OnCreate).setOnClickListener(v -> {
+            StaticUsed StaticUsed = new StaticUsed("我输入的名字");
+            Toast.makeText(this, "静态内部类 普通方法 : " 
+            + StaticUsed.getName(), Toast.LENGTH_SHORT).show();
+        });
+
+        // 静态内部类 + 重载函数
+        findViewById(R.id.btn_Inner_Reload).setOnClickListener(v -> {
+            int result1 = StaticUsed.mul(2, 3);
+            int result2 = StaticUsed.mul(2, 3, 4);
+            Toast.makeText(this, 
+                "静态内部类 重载结果为: " + result1 + " 和 " + result2, 
+                Toast.LENGTH_SHORT).show();
         });
     
-        // Hook系统Toast
-        findViewById(R.id.btn_Toast).setOnClickListener(v -> {
-            Toast.makeText(this, "原始Toast消息", Toast.LENGTH_SHORT).show();
+        // 非静态内部类 构造函数 + 静态变量
+        findViewById(R.id.btn_NotInner_Not).setOnClickListener(v -> {
+            CheckUsed checkUsed = new CheckUsed();
+            Toast.makeText(this,
+                "非静态内部类 " + checkUsed.check(10),
+                Toast.LENGTH_SHORT).show();
         });
-    
+        
         // 底部导航栏
         BottomNavigationView navView = findViewById(R.id.bottom_navigation);
         NavigationHelper.setupBottomNavigation(this, navView, R.id.nav_home);

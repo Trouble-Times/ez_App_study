@@ -15,6 +15,7 @@
         android:gravity="center"
         android:layout_margin="16dp">
 
+        <!-- Native方法调用 -->
         <Button
             android:id="@+id/btn_click_native"
             android:layout_width="wrap_content"
@@ -24,6 +25,7 @@
             android:paddingVertical="16dp"
             android:layout_marginBottom="16dp"/>
 
+        <!-- Java方法调用 -->
         <Button
             android:id="@+id/btn_click_java"
             android:layout_width="wrap_content"
@@ -33,34 +35,7 @@
             android:paddingVertical="16dp"
             android:layout_marginBottom="16dp"/>
 
-        <!-- 新增的5个按钮 -->
-        <Button
-            android:id="@+id/btn_InnerClass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="内部类"
-            android:paddingHorizontal="32dp"
-            android:paddingVertical="16dp"
-            android:layout_marginBottom="16dp"/>
-            
-        <Button
-            android:id="@+id/btn_OnCreate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="构造函数"
-            android:paddingHorizontal="32dp"
-            android:paddingVertical="16dp"
-            android:layout_marginBottom="16dp"/>
-            
-        <Button
-            android:id="@+id/btn_Reload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="重载函数"
-            android:paddingHorizontal="32dp"
-            android:paddingVertical="16dp"
-            android:layout_marginBottom="16dp"/>
-            
+        <!-- 接口实现 -->
         <Button
             android:id="@+id/btn_Implements"
             android:layout_width="wrap_content"
@@ -69,25 +44,36 @@
             android:paddingHorizontal="32dp"
             android:paddingVertical="16dp"
             android:layout_marginBottom="16dp"/>
-            
+
+        <!-- 静态内部类被调用过 -->
         <Button
-            android:id="@+id/btn_Thread"
+            android:id="@+id/btn_Inner_OnCreate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="多线程"
+            android:text="静态内部类构造函数"
             android:paddingHorizontal="32dp"
             android:paddingVertical="16dp"
             android:layout_marginBottom="16dp"/>
-            
+
+        <!-- 静态内部类重载函数 -->
         <Button
-            android:id="@+id/btn_Toast"
+            android:id="@+id/btn_Inner_Reload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hook系统Toast"
+            android:text="静态内部类重载函数"
             android:paddingHorizontal="32dp"
             android:paddingVertical="16dp"
             android:layout_marginBottom="16dp"/>
-        
+
+        <!-- 非静态内部类被调用过 -->
+        <Button
+            android:id="@+id/btn_NotInner_Not"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="非静态内部类构造函数"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp"
+            android:layout_marginBottom="16dp"/>
     </LinearLayout>
 
     <!-- 底部导航栏保持不变 -->
